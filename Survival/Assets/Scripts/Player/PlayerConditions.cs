@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public interface IDamagable 
@@ -104,5 +105,6 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     {
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
+
     }
 }
