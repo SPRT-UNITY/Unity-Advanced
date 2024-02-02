@@ -15,6 +15,8 @@ public class EquipTool : Equip
     public bool doesDealDamage;
     public int damage;
 
+    public float useStamina;
+
     private Animator animator;
     private Camera camera;
 
@@ -24,13 +26,16 @@ public class EquipTool : Equip
         animator = GetComponent<Animator>();
     }
 
-    public override void OnAttackInput()
+    public override void OnAttackInput(PlayerConditions playerConditions)
     {
         if(!attacking) 
         {
-            attacking = true;
-            animator.SetTrigger("Attack");
-            Invoke("OnCanAttack", attackRate);
+            if (playerConditions.UseStamina(useStamina)) 
+            {
+                attacking = true;
+                animator.SetTrigger("Attack");
+                Invoke("OnCanAttack", attackRate);
+            }
         }
     }
 
